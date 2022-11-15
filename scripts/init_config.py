@@ -131,7 +131,7 @@ def init_topology(args):
         data = load_json(INPUT_PATH)
 
         # Parse topology string
-        topology = parse_topology_str(args.topology)
+        topology = args.topology
 
         # Add default IOHK relay
 
