@@ -24,7 +24,7 @@ services:
       - POOL_MARGIN=0.05
       - METADATA_URL=https://gist.github.com/jasonribble/11fd864189708f1359fd51dc58794388
       - PUBLIC_RELAY_IP=PUBLIC
-    command: --start --staking --create
+    command: --start --staking 
     restart: always
   cardano-relay: # relay node
     image: arradev/cardano-pool:latest

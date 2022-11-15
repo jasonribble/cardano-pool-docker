@@ -6,7 +6,7 @@ docker run -it --rm \
     --network=cardano \
     -e NODE_PORT="3000" \
     -e NODE_NAME="registration" \
-    -e NODE_TOPOLOGY="<IP-address of relay1 node>:3000/1" \
+    -e NODE_TOPOLOGY="127.0.0.1:3000/1" \
     -e CARDANO_NETWORK="main" \
     -e CREATE_STAKEPOOL="True" \
     -e POOL_PLEDGE="100000000000" \
