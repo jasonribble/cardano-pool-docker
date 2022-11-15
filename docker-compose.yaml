@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  cardano-producer: # block-producing node
+    image: arradev/cardano-pool:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    container_name: test-producing
+    networks:
+      - cardano
+    volumes:
+      - $PWD/config/local/:/config
+    environment:
+      - HOST_ADDR=0.0.0.0
+      - NODE_PORT=3000
+      - NODE_NAME=test-producing
+      - NODE_TOPOLOGY=127.0.0.1:3001/1
+      - NODE_RELAY=False
+      - CARDANO_NETWORK=mainnet
+      - EKG_PORT=12888
+      - PROMETHEUS_PORT=12898
+      - PROMETHEUS_HOST=127.0.0.1
+      - POOL_PLEDGE=100000000000
+      - POOL_COST=340000000
+      - POOL_MARGIN=0.05
+      - METADATA_URL=https://gist.github.com/jasonribble/11fd864189708f1359fd51dc58794388
+      - PUBLIC_RELAY_IP=PUBLIC
+    command: --start --staking --create
+    restart: always
+  cardano-relay: # relay node
+    image: arradev/cardano-pool:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    container_name: cardano-relay1
+    networks:
+      - cardano
+    volumes:
+      - $PWD/config/local/:/config
+    environment:
+      - HOST_ADDR=0.0.0.0
+      - NODE_PORT=3001
+      - NODE_NAME=cardano-relay
+      - NODE_TOPOLOGY=127.0.0.1:3000/1
+      - NODE_RELAY=True
+      - CARDANO_NETWORK=mainnet
+      - EKG_PORT=12889
+      - PROMETHEUS_PORT=12899
+      - PROMETHEUS_HOST=127.0.0.1
+    command: --start
+    restart: always
+
+networks:
+  cardano:
+    name: cardano
