@@ -9,22 +9,9 @@ services:
       - cardano
     volumes:
       - $PWD/config/local/:/config
-    environment:
-      - HOST_ADDR=0.0.0.0
-      - NODE_PORT=3000
-      - NODE_NAME=cardano-producer
-      - NODE_TOPOLOGY=cardano-relay:3001/16
-      - NODE_RELAY=False
-      - CARDANO_NETWORK=main
-      - EKG_PORT=12888
-      - PROMETHEUS_PORT=12898
-      - PROMETHEUS_HOST=127.0.0.1
-      - POOL_PLEDGE=0
-      - POOL_COST=340000000
-      - POOL_MARGIN=0.05
-      - METADATA_URL=https://gist.github.com/jasonribble/11fd864189708f1359fd51dc58794388
-      - RESOLVE_HOSTNAMES=True
-    command: --start --staking 
+    env_file:
+      - producer.env
+   command: --start --staking 
     restart: always
     depends_on: 
       - cardano-relay
@@ -37,17 +24,8 @@ services:
       - cardano
     volumes:
       - $PWD/config/local/:/config
-    environment:
-      - HOST_ADDR=0.0.0.0
-      - NODE_PORT=3001
-      - NODE_NAME=cardano-relay
-      - NODE_TOPOLOGY=cardano-producer:3000/16
-      - NODE_RELAY=True
-      - CARDANO_NETWORK=main
-      - EKG_PORT=12889
-      - PROMETHEUS_PORT=12899
-      - PROMETHEUS_HOST=127.0.0.1
-      - RESOLVE_HOSTNAMES=True
+    env_file:
+      - relay.env
     command: --start
     restart: always
 
