@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-c"]
 WORKDIR /
 
 # Install tools
-RUN apt-get update -y && apt-get install -y vim netstat procps dnsutils bc curl nano cron python3 python3-pip tmux jq wget \
+RUN apt-get update -y && apt-get install -y vim net-tools procps dnsutils bc curl nano cron python3 python3-pip tmux jq wget \
     && apt-get clean
 RUN pip3 install pytz
 
