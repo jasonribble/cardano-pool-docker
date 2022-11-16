@@ -19,7 +19,7 @@ services:
       - EKG_PORT=12888
       - PROMETHEUS_PORT=12898
       - PROMETHEUS_HOST=127.0.0.1
-      - POOL_PLEDGE=10000000
+      - POOL_PLEDGE=0
       - POOL_COST=340000000
       - POOL_MARGIN=0.05
       - METADATA_URL=https://gist.github.com/jasonribble/11fd864189708f1359fd51dc58794388
